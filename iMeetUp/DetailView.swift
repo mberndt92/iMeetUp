@@ -33,18 +33,9 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     
-    static var testImageData: Data {
-        let jpegData = UIImage(named: "test")!
-            .jpegData(compressionQuality: 0.8)
-        return jpegData!
-    }
-    
     static var previews: some View {
         DetailView(
-            contact: Contact(
-                name: "Test Name",
-                photo: testImageData
-            )
+            contact: Contact.example
         )
     }
 }

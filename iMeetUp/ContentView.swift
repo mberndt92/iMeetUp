@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var contacts: [Contact] = []
+    @State var contacts: [Contact] = []
     
     // Image Picker related variables
     @State private var image: Image?
@@ -30,22 +30,16 @@ struct ContentView: View {
                 
                 List {
                     ForEach(contacts, id: \.id) { contact in
-                        HStack {
-                            NavigationLink {
-                                Text(contact.name)
-                            } label: {
-                                if let image = contact.image {
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                }
-                                Text(contact.name)
-                            }
-                            
+                        NavigationLink {
+                            Text(contact.name)
+                        } label: {
+                            ContactListItem(contact: contact)
+                                .frame(height: 150)
                         }
                     }
                     .onDelete(perform: removeContacts)
                 }
+                .listStyle(.plain)
                 
                 // attach a + button to the toolbar
                 // add an edit button to the toolbar
@@ -99,6 +93,7 @@ struct ContentView: View {
             let data = inputImage.jpegData(compressionQuality: 0.8) {
             let contact = Contact(name: newContactName, photo: data)
             contacts.append(contact)
+            newContactName = ""
         }
     }
     
@@ -109,6 +104,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(contacts: [Contact.example])
     }
 }

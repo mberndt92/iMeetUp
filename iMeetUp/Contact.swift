@@ -15,6 +15,8 @@ struct Contact: Codable, Comparable, Identifiable, Equatable {
     let name: String
     let photo: Data
     
+    
+    
     var image: Image? {
         guard let loadedImage = UIImage(data: photo) else { return nil }
         return Image(uiImage: loadedImage)
@@ -26,5 +28,17 @@ struct Contact: Codable, Comparable, Identifiable, Equatable {
     
     static func ==(lhs: Contact, rhs: Contact) -> Bool {
         return lhs.id == rhs.id
+    }
+}
+
+extension Contact {
+    static var exampleImageData: Data {
+        let jpegData = UIImage(named: "test")!
+            .jpegData(compressionQuality: 0.8)
+        return jpegData!
+    }
+    
+    static var example: Contact {
+        return Contact(name: "My Test Contact", photo: exampleImageData)
     }
 }
