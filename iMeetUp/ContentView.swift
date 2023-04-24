@@ -8,14 +8,102 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var contacts: [Contact] = []
+    
+    // Image Picker related variables
+    @State private var image: Image?
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+    
+    @State private var showingAddContactDialog = false
+    @State private var newContactName = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                // List of all the images / people met here
+                if contacts.isEmpty {
+                    Text("No contacts added yet")
+                        .foregroundColor(.secondary)
+                }
+                
+                List {
+                    ForEach(contacts, id: \.id) { contact in
+                        HStack {
+                            NavigationLink {
+                                Text(contact.name)
+                            } label: {
+                                if let image = contact.image {
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                }
+                                Text(contact.name)
+                            }
+                            
+                        }
+                    }
+                    .onDelete(perform: removeContacts)
+                }
+                
+                // attach a + button to the toolbar
+                // add an edit button to the toolbar
+                // allow deletion of list item
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingImagePicker.toggle()
+                    } label: {
+                        Label("Add Contact", systemImage: "plus")
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+            }
         }
-        .padding()
+        .onChange(of: inputImage) { _ in showingAddContactDialog.toggle() }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $inputImage)
+        }
+        .alert("Enter your name", isPresented: $showingAddContactDialog) {
+            TextField("Name of contact", text: $newContactName)
+            Button("OK", action: addContact)
+        } message: {
+            Text("Add new contact name")
+        }
+        .onAppear {
+            load()
+        }
+    }
+    
+    private func save() {
+        FileManager()
+            .saveInDocuments(to: "savedContacts", data: contacts)
+    }
+    
+    private func load() {
+        contacts = []
+        if FileManager().fileInDocumentsExists("savedContacts") {
+            let loadedContacts: [Contact] = FileManager()
+                .loadFromDocuments("savedContacts")
+            contacts = loadedContacts
+        }
+    }
+    
+    private func addContact() {
+        if let inputImage,
+            let data = inputImage.jpegData(compressionQuality: 0.8) {
+            let contact = Contact(name: newContactName, photo: data)
+            contacts.append(contact)
+        }
+    }
+    
+    private func removeContacts(at offsets: IndexSet) {
+        contacts.remove(atOffsets: offsets)
     }
 }
 
