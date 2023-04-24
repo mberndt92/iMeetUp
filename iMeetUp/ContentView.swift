@@ -29,14 +29,15 @@ struct ContentView: View {
                 
                 List {
                     ForEach(contacts, id: \.id) { contact in
-                        NavigationLink {
-                            Text(contact.name)
-                        } label: {
+//                        NavigationLink {
+//                            Text(contact.name)
+//                        } label: {
                             ContactListItem(contact: contact)
-                                .frame(height: 150)
-                        }
+//                                .frame(height: 150)
+//                        }
                     }
                     .onDelete(perform: removeContacts)
+                    .listRowSeparator(.hidden)
                 }
                 .listStyle(.plain)
             }
@@ -89,11 +90,13 @@ struct ContentView: View {
             let contact = Contact(name: newContactName, photo: data)
             contacts.append(contact)
             newContactName = ""
+            save()
         }
     }
     
     private func removeContacts(at offsets: IndexSet) {
         contacts.remove(atOffsets: offsets)
+        save()
     }
 }
 

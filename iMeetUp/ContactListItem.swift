@@ -16,15 +16,17 @@ struct ContactListItem: View {
             if let image = contact.image {
                 image
                     .resizable()
+                    .frame(height: 200)
                     .scaledToFit()
+                    
             }
             Text(contact.name)
                 .padding()
                 .background(Material.regularMaterial)
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.primary)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
                 .padding([.top, .trailing])
-
+            
         }
         .clipShape(RoundedRectangle(cornerRadius: 25))
     }
