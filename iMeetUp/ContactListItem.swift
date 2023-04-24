@@ -22,6 +22,9 @@ struct ContactListItem: View {
                 .padding()
                 .background(Material.regularMaterial)
                 .foregroundColor(Color.black)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .padding([.top, .trailing])
+
         }
         .clipShape(RoundedRectangle(cornerRadius: 25))
     }
