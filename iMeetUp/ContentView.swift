@@ -22,7 +22,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // List of all the images / people met here
                 if contacts.isEmpty {
                     Text("No contacts added yet")
                         .foregroundColor(.secondary)
@@ -40,10 +39,6 @@ struct ContentView: View {
                     .onDelete(perform: removeContacts)
                 }
                 .listStyle(.plain)
-                
-                // attach a + button to the toolbar
-                // add an edit button to the toolbar
-                // allow deletion of list item
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
