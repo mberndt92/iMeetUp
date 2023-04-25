@@ -12,14 +12,15 @@ struct ContactListItem: View {
     let contact: Contact
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        HStack {
             if let image = contact.image {
                 image
                     .resizable()
-                    .frame(height: 200)
                     .scaledToFit()
-                    
+                    .frame(height: 100)
+                    .clipShape(RoundedRectangle(cornerRadius: 50))
             }
+            Spacer()
             Text(contact.name)
                 .padding()
                 .background(Material.regularMaterial)
@@ -28,7 +29,8 @@ struct ContactListItem: View {
                 .padding([.top, .trailing])
             
         }
-        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .padding()
+        .background(Material.regular)
     }
 }
 

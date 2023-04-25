@@ -29,15 +29,20 @@ struct ContentView: View {
                 
                 List {
                     ForEach(contacts, id: \.id) { contact in
-//                        NavigationLink {
-//                            Text(contact.name)
-//                        } label: {
+                        ZStack {
+                            NavigationLink(destination: ContactDetailView(contact: contact)) {
+                                EmptyView()
+                            }
+                            .opacity(0)
+                            
                             ContactListItem(contact: contact)
-//                                .frame(height: 150)
-//                        }
+                                .frame(height: 150)
+                        }
                     }
                     .onDelete(perform: removeContacts)
                     .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets())
+                    .listRowBackground(EmptyView())
                 }
                 .listStyle(.plain)
             }

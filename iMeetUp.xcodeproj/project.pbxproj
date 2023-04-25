@@ -17,6 +17,7 @@
 		8AAB718229F5F3C4003AC4E5 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB718129F5F3C4003AC4E5 /* DetailView.swift */; };
 		8AAB718429F5F4E2003AC4E5 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB718329F5F4E2003AC4E5 /* Contact.swift */; };
 		8AAB718629F604BC003AC4E5 /* ContactListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB718529F604BC003AC4E5 /* ContactListItem.swift */; };
+		8AAB718829F74B9D003AC4E5 /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB718729F74B9D003AC4E5 /* ContactDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		8AAB718129F5F3C4003AC4E5 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		8AAB718329F5F4E2003AC4E5 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		8AAB718529F604BC003AC4E5 /* ContactListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListItem.swift; sourceTree = "<group>"; };
+		8AAB718729F74B9D003AC4E5 /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				8AAB716D29F5F13A003AC4E5 /* iMeetUpApp.swift */,
 				8AAB716F29F5F13A003AC4E5 /* ContentView.swift */,
 				8AAB718529F604BC003AC4E5 /* ContactListItem.swift */,
+				8AAB718729F74B9D003AC4E5 /* ContactDetailView.swift */,
 				8AAB718329F5F4E2003AC4E5 /* Contact.swift */,
 				8AAB718129F5F3C4003AC4E5 /* DetailView.swift */,
 				8AAB717B29F5F158003AC4E5 /* ImagePicker.swift */,
@@ -161,6 +164,7 @@
 				8AAB718029F5F248003AC4E5 /* Filemanager+DocumentsDirectory.swift in Sources */,
 				8AAB716E29F5F13A003AC4E5 /* iMeetUpApp.swift in Sources */,
 				8AAB717E29F5F160003AC4E5 /* ImageSaver.swift in Sources */,
+				8AAB718829F74B9D003AC4E5 /* ContactDetailView.swift in Sources */,
 				8AAB718429F5F4E2003AC4E5 /* Contact.swift in Sources */,
 				8AAB718629F604BC003AC4E5 /* ContactListItem.swift in Sources */,
 			);
