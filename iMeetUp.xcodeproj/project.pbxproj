@@ -10,6 +10,8 @@
 		8A267A8029FCB29E00AA9EE5 /* AddContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A267A7F29FCB29E00AA9EE5 /* AddContactView.swift */; };
 		8A267A8229FCF82400AA9EE5 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A267A8129FCF82400AA9EE5 /* Photo.swift */; };
 		8A267A8429FCFA9E00AA9EE5 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A267A8329FCFA9E00AA9EE5 /* LocationFetcher.swift */; };
+		8A267A8629FD046800AA9EE5 /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A267A8529FD046800AA9EE5 /* ContentView-ViewModel.swift */; };
+		8A267A8829FD048F00AA9EE5 /* ContactDetailView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A267A8729FD048F00AA9EE5 /* ContactDetailView-ViewModel.swift */; };
 		8AAB716E29F5F13A003AC4E5 /* iMeetUpApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB716D29F5F13A003AC4E5 /* iMeetUpApp.swift */; };
 		8AAB717029F5F13A003AC4E5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAB716F29F5F13A003AC4E5 /* ContentView.swift */; };
 		8AAB717229F5F13A003AC4E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AAB717129F5F13A003AC4E5 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 		8A267A7F29FCB29E00AA9EE5 /* AddContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactView.swift; sourceTree = "<group>"; };
 		8A267A8129FCF82400AA9EE5 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		8A267A8329FCFA9E00AA9EE5 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
+		8A267A8529FD046800AA9EE5 /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
+		8A267A8729FD048F00AA9EE5 /* ContactDetailView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactDetailView-ViewModel.swift"; sourceTree = "<group>"; };
 		8AAB716A29F5F13A003AC4E5 /* iMeetUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMeetUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AAB716D29F5F13A003AC4E5 /* iMeetUpApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMeetUpApp.swift; sourceTree = "<group>"; };
 		8AAB716F29F5F13A003AC4E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				8A267A7F29FCB29E00AA9EE5 /* AddContactView.swift */,
 				8AAB718529F604BC003AC4E5 /* ContactListItem.swift */,
 				8AAB718729F74B9D003AC4E5 /* ContactDetailView.swift */,
+				8A267A8529FD046800AA9EE5 /* ContentView-ViewModel.swift */,
+				8A267A8729FD048F00AA9EE5 /* ContactDetailView-ViewModel.swift */,
 				8AAB718329F5F4E2003AC4E5 /* Contact.swift */,
 				8A267A8129FCF82400AA9EE5 /* Photo.swift */,
 				8AAB718129F5F3C4003AC4E5 /* DetailView.swift */,
@@ -170,11 +176,13 @@
 				8AAB717C29F5F158003AC4E5 /* ImagePicker.swift in Sources */,
 				8A267A8029FCB29E00AA9EE5 /* AddContactView.swift in Sources */,
 				8A267A8429FCFA9E00AA9EE5 /* LocationFetcher.swift in Sources */,
+				8A267A8629FD046800AA9EE5 /* ContentView-ViewModel.swift in Sources */,
 				8AAB718229F5F3C4003AC4E5 /* DetailView.swift in Sources */,
 				8AAB717029F5F13A003AC4E5 /* ContentView.swift in Sources */,
 				8AAB718029F5F248003AC4E5 /* Filemanager+DocumentsDirectory.swift in Sources */,
 				8AAB716E29F5F13A003AC4E5 /* iMeetUpApp.swift in Sources */,
 				8AAB717E29F5F160003AC4E5 /* ImageSaver.swift in Sources */,
+				8A267A8829FD048F00AA9EE5 /* ContactDetailView-ViewModel.swift in Sources */,
 				8A267A8229FCF82400AA9EE5 /* Photo.swift in Sources */,
 				8AAB718829F74B9D003AC4E5 /* ContactDetailView.swift in Sources */,
 				8AAB718429F5F4E2003AC4E5 /* Contact.swift in Sources */,

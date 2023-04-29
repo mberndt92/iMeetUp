@@ -36,8 +36,6 @@ struct AddContactView: View {
     
     @FocusState private var focusedField: FocusedField?
     
-    let locationFetcher = LocationFetcher()
-    
     var onSave: (String, CLLocationCoordinate2D) -> Void
     
     var body: some View {
@@ -71,21 +69,21 @@ struct AddContactView: View {
             }
         }
         .onAppear {
+            
             focusedField = .contactName
-            self.locationFetcher.start()
-            if let location = self.locationFetcher.lastKnownLocation {
-                mapRegion.center = location
-            }
         }
     }
     
+    init(
+        location: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 52.5200, longitude: 13.4050),
+        onSave: @escaping (String, CLLocationCoordinate2D) -> ()) {
+            _photoLocation = State(initialValue: location)
+            self.onSave = onSave
+            _mapRegion = State(initialValue: MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)))
+    }
+    
     private func addNewContact() {
-        if let location = self.locationFetcher.lastKnownLocation {
-            print("Your location is \(location)")
-            onSave(contactName, location)
-        } else {
-            print("Your location is unknown")
-        }
+        onSave(contactName, self.photoLocation)
     }
 }
 

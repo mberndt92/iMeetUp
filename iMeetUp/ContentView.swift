@@ -9,26 +9,22 @@ import SwiftUI
 import CoreLocation
 
 struct ContentView: View {
+    @StateObject private var viewModel = ViewModel(contacts: [])
     
-    @State var contacts: [Contact] = []
+    let initialContacts: [Contact]
     
-    // Image Picker related variables
-    @State private var image: Image?
-    @State private var showingImagePicker = false
-    @State private var inputImage: UIImage?
-    
-    @State private var showingAddContactDialog = false
+    let locationFetcher = LocationFetcher()
     
     var body: some View {
         NavigationView {
             VStack {
-                if contacts.isEmpty {
+                if viewModel.contacts.isEmpty {
                     Text("No contacts added yet")
                         .foregroundColor(.secondary)
                 }
                 
                 List {
-                    ForEach(contacts, id: \.id) { contact in
+                    ForEach(viewModel.contacts, id: \.id) { contact in
                         ZStack {
                             NavigationLink(destination: ContactDetailView(contact: contact)) {
                                 EmptyView()
@@ -49,7 +45,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        showingImagePicker.toggle()
+                        viewModel.showingImagePicker.toggle()
                     } label: {
                         Label("Add Contact", systemImage: "plus")
                     }
@@ -60,31 +56,38 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: inputImage) { _ in showingAddContactDialog.toggle() }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $inputImage)
+        .onChange(of: viewModel.inputImage) { _ in viewModel.showingAddContactDialog.toggle() }
+        .sheet(isPresented: $viewModel.showingImagePicker) {
+            ImagePicker(image: $viewModel.inputImage)
         }
-        .sheet(isPresented: $showingAddContactDialog) {
-            AddContactView { name, coordinate in
-                addContact(name: name, coordinate: coordinate)
+        .sheet(isPresented: $viewModel.showingAddContactDialog) {
+            if let location = self.locationFetcher.lastKnownLocation {
+                AddContactView(location: location) { name, coordinate in
+                    addContact(name: name, coordinate: coordinate)
+                }
+            } else {
+                AddContactView { name, coordinate in
+                    addContact(name: name, coordinate: coordinate)
+                }
             }
         }
         .onAppear {
+            self.locationFetcher.start()
             load()
         }
     }
     
     private func save() {
         FileManager()
-            .saveInDocuments(to: "savedContacts", data: contacts)
+            .saveInDocuments(to: "savedContacts", data: viewModel.contacts)
     }
     
     private func load() {
-        contacts = []
+        viewModel.contacts = []
         if FileManager().fileInDocumentsExists("savedContacts") {
             let loadedContacts: [Contact] = FileManager()
                 .loadFromDocuments("savedContacts")
-            contacts = loadedContacts
+            viewModel.contacts = loadedContacts
         }
     }
     
@@ -92,8 +95,8 @@ struct ContentView: View {
         name: String,
         coordinate: CLLocationCoordinate2D
     ) {
-        if let inputImage,
-            let data = inputImage.jpegData(compressionQuality: 0.8) {
+        if let inputImage = viewModel.inputImage,
+           let data = inputImage.jpegData(compressionQuality: 0.8) {
             let photo = Photo(
                 data: data,
                 latitude: coordinate.latitude,
@@ -103,19 +106,19 @@ struct ContentView: View {
                 name: name,
                 photo:  photo
             )
-            contacts.append(contact)
+            viewModel.contacts.append(contact)
             save()
         }
     }
     
     private func removeContacts(at offsets: IndexSet) {
-        contacts.remove(atOffsets: offsets)
+        viewModel.contacts.remove(atOffsets: offsets)
         save()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(contacts: [Contact.example])
+        ContentView(initialContacts: [Contact.example])
     }
 }
