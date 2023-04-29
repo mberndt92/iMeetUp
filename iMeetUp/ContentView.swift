@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ContentView: View {
     
@@ -17,7 +18,6 @@ struct ContentView: View {
     @State private var inputImage: UIImage?
     
     @State private var showingAddContactDialog = false
-    @State private var newContactName = ""
     
     var body: some View {
         NavigationView {
@@ -64,11 +64,10 @@ struct ContentView: View {
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(image: $inputImage)
         }
-        .alert("Enter your name", isPresented: $showingAddContactDialog) {
-            TextField("Name of contact", text: $newContactName)
-            Button("OK", action: addContact)
-        } message: {
-            Text("Add new contact name")
+        .sheet(isPresented: $showingAddContactDialog) {
+            AddContactView { name, coordinate in
+                addContact(name: name, coordinate: coordinate)
+            }
         }
         .onAppear {
             load()
@@ -89,12 +88,22 @@ struct ContentView: View {
         }
     }
     
-    private func addContact() {
+    private func addContact(
+        name: String,
+        coordinate: CLLocationCoordinate2D
+    ) {
         if let inputImage,
             let data = inputImage.jpegData(compressionQuality: 0.8) {
-            let contact = Contact(name: newContactName, photo: data)
+            let photo = Photo(
+                data: data,
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
+            )
+            let contact = Contact(
+                name: name,
+                photo:  photo
+            )
             contacts.append(contact)
-            newContactName = ""
             save()
         }
     }
