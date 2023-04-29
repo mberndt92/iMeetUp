@@ -13,8 +13,6 @@ struct ContentView: View {
     
     let initialContacts: [Contact]
     
-    let locationFetcher = LocationFetcher()
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -61,59 +59,23 @@ struct ContentView: View {
             ImagePicker(image: $viewModel.inputImage)
         }
         .sheet(isPresented: $viewModel.showingAddContactDialog) {
-            if let location = self.locationFetcher.lastKnownLocation {
+            if let location = viewModel.locationFetcher.lastKnownLocation {
                 AddContactView(location: location) { name, coordinate in
-                    addContact(name: name, coordinate: coordinate)
+                    viewModel.addContact(name: name, coordinate: coordinate)
                 }
             } else {
                 AddContactView { name, coordinate in
-                    addContact(name: name, coordinate: coordinate)
+                    viewModel.addContact(name: name, coordinate: coordinate)
                 }
             }
         }
         .onAppear {
-            self.locationFetcher.start()
-            load()
+            viewModel.load()
         }
     }
     
-    private func save() {
-        FileManager()
-            .saveInDocuments(to: "savedContacts", data: viewModel.contacts)
-    }
-    
-    private func load() {
-        viewModel.contacts = []
-        if FileManager().fileInDocumentsExists("savedContacts") {
-            let loadedContacts: [Contact] = FileManager()
-                .loadFromDocuments("savedContacts")
-            viewModel.contacts = loadedContacts
-        }
-    }
-    
-    private func addContact(
-        name: String,
-        coordinate: CLLocationCoordinate2D
-    ) {
-        if let inputImage = viewModel.inputImage,
-           let data = inputImage.jpegData(compressionQuality: 0.8) {
-            let photo = Photo(
-                data: data,
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude
-            )
-            let contact = Contact(
-                name: name,
-                photo:  photo
-            )
-            viewModel.contacts.append(contact)
-            save()
-        }
-    }
-    
-    private func removeContacts(at offsets: IndexSet) {
-        viewModel.contacts.remove(atOffsets: offsets)
-        save()
+    func removeContacts(at offsets: IndexSet) {
+        viewModel.removeContacts(at: offsets)
     }
 }
 
