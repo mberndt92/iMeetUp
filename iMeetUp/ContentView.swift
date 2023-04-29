@@ -11,7 +11,7 @@ import CoreLocation
 struct ContentView: View {
     @StateObject private var viewModel = ViewModel(contacts: [])
     
-    let initialContacts: [Contact]
+    let initialContacts: [Contact] // This should likely be replace with an environment object
     
     var body: some View {
         NavigationView {
